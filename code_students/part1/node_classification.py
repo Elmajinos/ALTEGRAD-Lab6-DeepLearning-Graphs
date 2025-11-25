@@ -35,7 +35,7 @@ y = np.array(y)
 
 ############## Task 5
 # Visualizes the karate network
-
+nx.draw_networkx(G, node_color=colors, with_labels=True, node_size=300, font_size=10)
 ##################
 # your code here #
 ##################
@@ -46,7 +46,7 @@ y = np.array(y)
 n_dim = 128
 n_walks = 10
 walk_length = 20
-model = # your code here
+model = deepwalk(G, n_walks, walk_length, n_dim)
 
 embeddings = np.zeros((n, n_dim))
 for i, node in enumerate(G.nodes()):
