@@ -9,12 +9,26 @@ from sklearn.preprocessing import LabelEncoder
 
 def normalize_adjacency(A):
     ############## Task 9
-
+    
     ##################
     # your code here #
     ##################
+
+    n = A.shape[0]
+    A_tild = A + sp.identity(n, format='csr')
     
-	return A_normalized
+    degrees = np.array(A_tild.sum(axis=1)).flatten()
+    
+    D_tild = sp.diags(degrees, format='csr')
+    
+    D_tild_inv_sqrt = np.power(degrees, -0.5)
+    D_tild_inv_sqrt[np.isinf(D_tild_inv_sqrt)] = 0.
+
+    D_tild_inv_sqrt = sp.diags(D_tild_inv_sqrt, format='csr')
+    
+    A_normalized = D_tild_inv_sqrt @ A_tild @ D_tild_inv_sqrt
+    
+    return A_normalized
 
 
 def load_cora():
